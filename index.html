@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="world_stats.js"></script>
+    <script src="player_stats.js"></script>
+    <script type="text/javascript" src="home.js"></script>
+    <script src="tick.js"></script>
+    <link href="style.css" rel="stylesheet">
+    <link href="animations.css" rel="stylesheet">
+    <link href="Hover-master\css\hover.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/44ac650b07.js" crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+    </script>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js"
+        integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body onload="playMusic()">
+    <nav id="main_navbar" style="background-color: #e2ebc3;" class="shadow-sm navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid">
+            <h3 style="color: #36764e;">Grove</h3>
+            <p style="color: #77614e; margin-right: 15px;">v.0.0.1</p>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item" style="margin-left: 25px;">
+                        <div id="message_display"
+                            style="border: 2px solid; border-radius: 10px; text-align: center; background-color: #eed3cc; width: 600px; height: 50px;">
+                        </div>
+                    </li>
+                    <li style="margin-left: 25px;">
+                        <h5 id="month_and_season">March | Spring</h5>
+                        <h5 id="year_count">Year 0</h5>
+                    </li>
+                    <li>
+                        <h6 id="raining_alert" style="margin-left: 10px; color: #484a77;" hidden>It's raining <i
+                                style="color: #4d65b4;" class="fas fa-cloud-rain"></i></h6>
+                    </li>
+                </ul>
+                <div>
+                    <a href="https://twitter.com/BlackBook21" target="_blank"><i
+                            class="fab fa-twitter-square fa-3x"></i></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="fade-in-fwd" id="plant_selection" style="margin: 15px 15px 15px 15px;" hidden>
+        <h2>Plant Selection</h2>
+        <p>What do you want to become?</p>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Moonflower <i class="fas fa-moon"></i></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">"Ipomoea alba"</h6>
+                            <p class="card-text">The name moonflower derives from their blooming in the evening and
+                                their being round in shape like a full moon.</p>
+                            <button type="button" onclick="moonflowerSelect()"
+                                class="btn btn-dark hvr-bob">Select</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Bleeding Heart <i class="fas fa-heart-broken"></i></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">"Lamprocapnos"</h6>
+                            <p class="card-text">It is valued in gardens and in floristry for its heart-shaped pink and
+                                white flowers, borne in spring.</p>
+                            <button type="button" onclick="bleedingHeartSelect()"
+                                class="btn btn-dark hvr-bob">Select</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Morning Glory <i class="fas fa-moon"></i></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">"Ipomoea indica"</h6>
+                            <p class="card-text">The plant is grown as an ornamental for its attractive flowers, but it
+                                is invasive in many regions of the world and is specifically listed on New Zealand's
+                                Biosecurity Act 1993.</p>
+                            <button type="button" onclick="morningGlorySelect()"
+                                class="btn btn-dark hvr-bob">Select</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="main_game">
+        <div style="margin: 15px 15px 15px 15px;">
+            <h3>You are a seed.</h3>
+            <p id="plant_type_text"></p>
+            <button style="color: #e29898;" type="button" onclick="homeButton()" class="btn btn-dark hvr-bob">Home <i
+                    class="fas fa-home"></i></button>
+            <button style="color: #e29898;" type="button" onclick="upgradesButton()"
+                class="btn btn-dark hvr-bob">Upgrades <i class="far fa-arrow-alt-circle-up"></i></button>
+            <button style="color: #e0dc9f;" type="button" onclick="achievementsButton()"
+                class="btn btn-dark hvr-bob">Achievements <i class="fas fa-trophy"></i></button>
+            <button style="color: #8d9497;" type="button" onclick="settingsButton()"
+                class="btn btn-dark hvr-bob">Settings <i class="fas fa-cogs"></i></button>
+
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div id="home_tab" class="fade-in-fwd">
+                    <div class="container" style="margin-top: 25px;">
+                        <div class="row">
+                            <div class="col">
+                                <h3 id="plant_lvl"><i class="fas fa-leaf"></i> Plant Lvl: 0</h3>
+                                <div class="progress">
+                                    <div id="plant_lvl_bar"
+                                        class="progress-bar progress-bar-striped progress-bar-animated"
+                                        role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 0%">0xp/50xp</div>
+                                </div>
+                                <button id="germinate_button" style="margin-top: 15px;" onclick="germinate()"
+                                    type="button" class="btn btn-dark">Germinate <i
+                                        class="fas fa-seedling"></i></button>
+                                <button onclick="sprout()" id="sprout_button" type="button"
+                                    class="btn btn-success fade-in-fwd" hidden>Sprout</button>
+                            </div>
+
+                            <div class="col">
+                                <img src="img/testsvg.svg">
+                            </div>
+                            <div class="col ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="upgrades_tab" class="fade-in-fwd" hidden>
+                    <div class="container" style="margin-top: 25px;">
+                        <div class="row">
+                            <div class="col">
+                                <h3><i class="far fa-arrow-alt-circle-up"></i> Upgrades</h3>
+
+                            </div>
+                            <div class="col">
+
+                            </div>
+                            <div class="col ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="achievements_tab" class="fade-in-fwd" hidden>
+                    <div class="container" style="margin-top: 25px;">
+                        <div class="row">
+                            <h3><i class="fas fa-trophy"></i> Achievements</h3>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div style="opacity: 25%;" class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x"></i>
+                                    <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div style="opacity: 25%;" class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x"></i>
+                                    <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div style="opacity: 25%;" class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x"></i>
+                                    <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div style="opacity: 25%;" class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x"></i>
+                                    <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div style="opacity: 25%;" class="fa-stack fa-2x">
+                                    <i class="fas fa-square fa-stack-2x"></i>
+                                    <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="settings_tab" class="fade-in-fwd" hidden>
+                    <div class="container" style="margin-top: 25px;">
+                        <div class="row">
+                            <div class="col">
+                                <h3 style="margin-bottom: 25px;"><i class="fas fa-cogs"></i> Settings</h3>
+
+                                <label class="switch">
+                                    <input onclick="musicSwitch()" id="music_checkbox" type="checkbox" disabled>
+                                    <span class="slider round"></span>
+                                </label>
+                                <h4 style="display: inline;">Music</h4>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col ">
+                            </div>
+                        </div>
+                        <div style="margin-top: 25px;" class="row">
+                            <div class="col">
+                                <label class="switch">
+                                    <input id="sound_checkbox" type="checkbox" disabled>
+                                    <span class="slider round"></span>
+                                </label>
+                                <h4 style="display: inline;">UI Sound</h4>
+                            </div>
+                            <div class="col">
+                            </div>
+                            <div class="col ">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin: 400px 15px 15px 15px;">
+                    <h3>Resources</h3>
+                    <div
+                        style="border: 2px solid; border-radius: 10px; padding: 15px 15px 15px 15px; background-color: #eaf4e8; width: 600px; height: 350px;">
+                        <div style="text-align: center;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col">
+                                        <div data-toggle="tooltip" data-placement="top" data-original-title="this is a top tooltip">
+                                            <p style="margin-bottom: -5px; color: #4d65b4;"><i class="fas fa-tint"></i>
+                                                Water</p>
+                                            <p id="water_count">0/100</p>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <p style="margin-bottom: -5px; color: #fb6b1d;"><i class="fas fa-atom"></i>
+                                            Nitrogen</p>
+                                        <p id="water_count">0/100</p>
+                                    </div>
+                                    <div class="col">
+                                        <p style="margin-bottom: -5px; color: #e83b3b;"><i class="fas fa-atom"></i>
+                                            Phosphorus</p>
+                                        <p id="water_count">0/100</p>
+                                    </div>
+                                    <div class="col">
+                                        <p style="margin-bottom: -5px; color: #a2a947;"><i class="fas fa-atom"></i>
+                                            Potassium</p>
+                                        <p id="water_count">0/100</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <h4>Log <i class="fas fa-envelope-square"></i></h4>
+                <div style="width: 400px;" class="gradient-border" id="messages_log_window">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="footer shadow-sm">
+        <p>Black Book | 2021</p>
+    </div>
+</body>
+
+<!-- Flexbox container for aligning the toasts -->
+<div style="margin-bottom: 100px;" aria-live="polite" aria-atomic="true"
+    class="d-flex justify-content-center align-items-center w-100">
+
+    <!-- Then put toasts within -->
+    <div style="margin-bottom: 100px;" id="test_toast" class="toast" role="alert" aria-live="assertive"
+        aria-atomic="true">
+        <div class="toast-header">
+            <img src="..." class="rounded me-2" alt="...">
+            <strong class="me-auto">Bootstrap</strong>
+            <small>11 mins ago</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Hello, world! This is a toast message.
+        </div>
+    </div>
+</div>

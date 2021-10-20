@@ -1,0 +1,35 @@
+Grove - A game about plants and deep simulation
+
+Goal of the Game
+The goal of the game, as any plant would like to achieve, is to spread until your plant eventually
+encompasses the entire planet.
+
+Stages of the Game
+Stage I - Seed Stage
+     Seed stage is mostly focused on getting the feel for a new environment, and it's the player's opportunity
+to successfully germinate the seed. Depending on the plant being grown, germination might have to take longer.
+Stage 2 - Plant Stage
+Stage 3 - Spread Stage
+Stage 4 - Mutation Stage
+Stage 5 - Endgame
+
+Classes
+Angiosperms: The Flowering Plants
+Gymnosperms: Seed (Conifers, cycads, Ginkgo, and gnetophytes)
+Pteridophytes: Vascular plant that disperses spores (Ferns, horsetails, and lycophytes)
+Bryophytes: Land Plants (liverworts, hornworts and mosses)
+
+Player Stats
+- Player Level: The player's level is a persistent value to display total progression throughout multiple playthroughs.
+- Plant Level: The plant level represents the player's current progression in a single run.
+
+World Stats
+- Season
+- Current Temperature
+
+Main resources are Nitrogen (N), Phosphorus (P) and Potassium (K).
+Nitrogen = green leaves
+Phosphorus = big flowers and strong roots
+Potassium = helps plants fight off disease
+
+! Too little or too much water or nutrients can also be harmful. !
