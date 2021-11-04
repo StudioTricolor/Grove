@@ -2,24 +2,84 @@ setInterval(tick, 1000);
 setInterval(changeMessage, 10000);
 
 function tick() {
+    // Update Plant XP
+    plantXp += plantXPSec;
+    document.getElementById("plant_lvl_bar").style = "width: " + (plantXp / plantMaxXp) * 100 + "%;";
+    document.getElementById("plant_lvl_bar").innerHTML = plantXp + "xp/" + Math.floor(plantMaxXp) + "xp";
+    if (plantXp >= plantMaxXp) {
+
+        var levelUp = new Howl({
+          src: ['sound/snd_level_up.wav'],
+        });
+      
+        levelUp.play();
+        plantLvl++;
+        plantXp = 0;
+        plantMaxXp *= 1.65;
+        let div = document.createElement('div');
+        div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ".</p>";
+        document.getElementById("messages_log_window").appendChild(div);
+        
+        if(plantLvl == 10) {
+            mutationPoints++;
+            let div_mutate = document.createElement('div');
+            div_mutate.innerHTML = "<p class='slide-in-left'><i class='fas fa-bacteria'></i> You gained a mutation point!</p>";
+            document.getElementById("messages_log_window").appendChild(div_mutate);
+            document.getElementById("mutation_button").hidden = false;
+        }
+
+        document.getElementById("plant_lvl_bar").style = "width: " + (plantXp / plantMaxXp) * 100 + "%;";
+        document.getElementById("plant_lvl").innerHTML = "<i class='fas fa-leaf'></i> " + "Plant Lvl: " + plantLvl;
+      }
+
     // Update Resources
     waterMax = 100 + Math.floor(plantLvl * 1.85);
-    document.getElementById("water_count").innerHTML = water + "/" + waterMax;
+    document.getElementById("water_count").innerHTML = water.toFixed(0) + "/" + waterMax.toFixed(0);
+
+    if(energy < energyMax) {
+        energy += energyPerSec;
+    }
+    if(water < waterMax) {
+        water += waterPerSec;
+    }
+    energyMax = 25 + Math.floor(plantLvl * 1.85);
+    document.getElementById("energy_count").innerHTML = energy.toFixed(0) + "/" + energyMax.toFixed(0);
+
+    // Update Resources Per Second
+    if(energyPerSec > 0) {
+        document.getElementById("energy_per_second").hidden = false;
+        document.getElementById("energy_per_second").innerHTML = '<i class="far fa-sun"></i> Energy: + ' + energyPerSec.toFixed(1) + "/sec";
+    } else {
+        document.getElementById("energy_per_second").hidden = true;
+    }
+
+    if(waterPerSec > 0) {
+        document.getElementById("water_per_second").hidden = false;
+        document.getElementById("water_per_second").innerHTML = '<i class="fas fa-tint"></i> Water: + ' + waterPerSec.toFixed(1) + "/sec";
+    } else {
+        document.getElementById("water_per_second").hidden = true;
+    }
 
     //document.body.innerHTML = "";
+
+    // Upgrade Check
+    if(water >= 15) {
+        document.getElementById("smart_roots_card").style = "max-width: 18rem; opacity: 100%;";
+    }
+
+    if(energy >= 10) {
+        document.getElementById("internal_clock_card").style = "max-width: 18rem; opacity: 100%;";
+    }
 
     // Update Weather
     if(getRandomInt(500) == 250 && weather != "rain") {
         weather = "rain";
+        waterPerSec++;
         document.getElementById("raining_alert").hidden = false;
         setTimeout(clearWeather, 100000);
         let div = document.createElement('div');
         div.innerHTML = "<p class='slide-in-left'><i style='color: #4d65b4;' class='fas fa-cloud-rain'></i> It's raining!</p>";
         document.getElementById("messages_log_window").appendChild(div);
-    }
-    if(weather == "rain") {
-        if(water < waterMax)
-            water++;
     }
 
     // Update Time
@@ -55,6 +115,7 @@ function tick() {
     else if (month == 12) {
         document.getElementById("month_and_season").innerHTML = "December | Winter";
         year++;
+        document.getElementById("year_count").innerHTML = "Year: " + year;
         month = 1;
     }
 
@@ -70,9 +131,27 @@ function tick() {
         document.getElementById("messages_log_window").appendChild(div);
         //waterMax += Math.floor(waterMax * 1.25);
     }
+
+
+    // Update Plant Viewport
+    document.getElementById("plant_height").innerHTML = plantHeight.toFixed(2) + " m tall";
+    if(plantHeight >= 0.5) {
+        document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun3.svg"
+    } else if(plantHeight >= 1) {
+        document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun4.svg"
+    } else if(plantHeight >= 2) {
+        document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun5.svg"
+    } else if(plantHeight >= 3) {
+        document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun6.svg"
+    }
+
+    document.getElementById("grove_title").innerHTML = "Grove - " + plantHeight.toFixed(2) + " m";
+    plantHeight += metersPerSec;
+    document.getElementById("plant_height").innerHTML = plantHeight.toFixed(2) + " m tall";
 }
 
 function clearWeather() {
+    waterPerSec--;
     weather = "clear";
     document.getElementById("raining_alert").hidden = true;
     let div = document.createElement('div');
@@ -86,11 +165,12 @@ function changeMessage() {
         document.getElementById("message_text").remove();
     let div = document.createElement('div');
     div.id = "message_text"
+    div.style = "text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);";
 
     if(messageChance == 0)
         div.innerHTML = "<p class='scale-in-bottom'>New Study Finds that Reading Headlines Can Be Bad for Your Health</p>";
     else if(messageChance == 1)
-        div.innerHTML = "<p class='scale-in-bottom'>Performer handed plant mid performance. 'Make some noise for this plant!'.</p>";
+        div.innerHTML = "<p class='scale-in-bottom'>Musician handed plant mid performance. 'Make some noise for this plant!'.</p>";
     else if(messageChance == 2)
         div.innerHTML = "<p class='scale-in-bottom'>New Study Finds that Reading Headlines Can Be Bad for Your Health</p>";
 
