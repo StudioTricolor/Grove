@@ -15,7 +15,26 @@ function homeButton() {
 
   sound.play();
 
+  document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = false;
+  document.getElementById("mutations_tab").hidden = true;
+  document.getElementById("upgrades_tab").hidden = true;
+  document.getElementById("settings_tab").hidden = true;
+  document.getElementById("achievements_tab").hidden = true;
+  document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
+}
+
+function socialButton() {
+  var sound = new Howl({
+    src: ['sound/click.ogg'],
+  });
+
+  sound.play();
+
+  document.getElementById("relationship_tab").hidden = true;
+  document.getElementById("home_tab").hidden = true;
+  document.getElementById("social_tab").hidden = false;
   document.getElementById("mutations_tab").hidden = true;
   document.getElementById("upgrades_tab").hidden = true;
   document.getElementById("settings_tab").hidden = true;
@@ -30,12 +49,14 @@ function researchButton() {
 
   sound.play();
 
+  document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
   document.getElementById("upgrades_tab").hidden = true;
   document.getElementById("settings_tab").hidden = true;
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = false;
+  document.getElementById("social_tab").hidden = true;
 }
 
 function upgradesButton() {
@@ -45,12 +66,14 @@ function upgradesButton() {
 
   sound.play();
 
+  document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
   document.getElementById("upgrades_tab").hidden = false;
   document.getElementById("settings_tab").hidden = true;
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
 }
 
 function mutationsButton() {
@@ -61,12 +84,14 @@ function mutationsButton() {
   sound.play();
   bruh();
 
+  document.getElementById("relationship_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = false;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("upgrades_tab").hidden = true;
   document.getElementById("settings_tab").hidden = true;
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
 }
 
 function achievementsButton() {
@@ -76,12 +101,14 @@ function achievementsButton() {
 
   sound.play();
 
+  document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
   document.getElementById("achievements_tab").hidden = false;
   document.getElementById("upgrades_tab").hidden = true;
   document.getElementById("settings_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
 }
 
 function settingsButton() {
@@ -91,12 +118,31 @@ function settingsButton() {
 
   sound.play();
 
+  document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
   document.getElementById("upgrades_tab").hidden = true;
   document.getElementById("settings_tab").hidden = false;
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
+}
+
+function relationshipButton() {
+  var sound = new Howl({
+    src: ['sound/click.ogg']
+  });
+
+  sound.play();
+
+  document.getElementById("relationship_tab").hidden = false;
+  document.getElementById("home_tab").hidden = true;
+  document.getElementById("mutations_tab").hidden = true;
+  document.getElementById("upgrades_tab").hidden = true;
+  document.getElementById("settings_tab").hidden = true;
+  document.getElementById("achievements_tab").hidden = true;
+  document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
 }
 
 function germinate() {
@@ -107,7 +153,7 @@ function germinate() {
 
   sound.play();
 
-  plantXp++;
+  plantXp += 1*growUpgradeLevel;
 
   if (getRandomInt(10) == 5) {
     if (water < waterMax)
@@ -147,6 +193,10 @@ function germinate() {
       document.getElementById("main_game").hidden = true;
     }
 
+    if(plantLvl == 2) {
+      document.getElementById("upgrade_button").hidden = false;
+  }
+
     if (plantLvl == 3) {
       document.getElementById("sprout_button").hidden = false;
     }
@@ -154,8 +204,9 @@ function germinate() {
 }
 
 function grow() {
-  plantXp++;
-  plantHeight += 0.001;
+  plantXp += 1*growUpgradeLevel;
+  if(plantHeight < plantMaxHeight || hasUnusualHeight == true)
+    plantHeight += 0.001;
 
   var sound = new Howl({
     src: ['sound/snd_grow_click.wav'],
@@ -186,7 +237,7 @@ function grow() {
     div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ".</p>";
     document.getElementById("messages_log_window").appendChild(div);
 
-    if(plantLvl == 10) {
+    if(plantLvl == 20) {
       mutationPoints++;
       let div_mutate = document.createElement('div');
       div_mutate.innerHTML = "<p class='slide-in-left'><i class='fas fa-bacteria'></i> You gained a mutation point!</p>";
@@ -219,6 +270,10 @@ function sprout() {
 
   click.play();
 
+  if (plantType == "sun_flower") {
+    document.getElementById("plant_description").innerHTML = "You are a small Sunflower.";
+  }
+
   document.getElementById("sprout_button").remove();
   document.getElementById("germinate_button").remove();
   document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun2.svg";
@@ -229,16 +284,10 @@ function sprout() {
   document.getElementById("grow_button").hidden = false;
   document.getElementById("research_button").hidden = false;
   document.getElementById("leaves_container").hidden = false;
-
-  if (plantType == "sun_flower") {
-    document.getElementById("plant_description") = "You are a small sunflower.";
-  }
+  document.getElementById("achievement_button").hidden = false;
 
   if (plantLvl >= 3 && achv_aNewBeginning == false) {
     achv_aNewBeginning = true;
-    var myToastEl = document.getElementById('test_toast');
-    var myToast = bootstrap.Toast.getOrCreateInstance(myToastEl)
-    myToast.show();
 
     var sound = new Howl({
       src: ['sound/achievemant.ogg']
@@ -305,6 +354,12 @@ function buttonHover() {
 
 function betaWarning() {
   $('#exampleModalCenter').modal('show');
+
+  var sound = new Howl({
+    src: ['sound/event_warning.ogg']
+  });
+
+  sound.play();
 }
 
 function betaWarningClose() {
@@ -318,3 +373,7 @@ function betaWarningClose() {
   $('#exampleModalCenter').modal('focus') = false;
   $('#exampleModalCenter').modal('dispose');
 }
+
+document.getElementById("music_checkbox").checked = true;
+document.getElementById("sound_checkbox").checked = true;
+document.getElementById("center_content_checkbox").checked = true;

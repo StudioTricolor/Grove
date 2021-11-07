@@ -20,8 +20,13 @@ function tick() {
         div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ".</p>";
         document.getElementById("messages_log_window").appendChild(div);
         
-        if(plantLvl == 10) {
+        if(plantLvl == 2) {
+            document.getElementById("upgrade_button").hidden = false;
+        }
+
+        if(plantLvl == 20) {
             mutationPoints++;
+            document.getElementById("mutation_point_display").innerHTML = "You have "+mutationPoints+" Mutation Points";
             let div_mutate = document.createElement('div');
             div_mutate.innerHTML = "<p class='slide-in-left'><i class='fas fa-bacteria'></i> You gained a mutation point!</p>";
             document.getElementById("messages_log_window").appendChild(div_mutate);
@@ -29,11 +34,11 @@ function tick() {
         }
 
         document.getElementById("plant_lvl_bar").style = "width: " + (plantXp / plantMaxXp) * 100 + "%;";
-        document.getElementById("plant_lvl").innerHTML = "<i class='fas fa-leaf'></i> " + "Plant Lvl: " + plantLvl;
+        document.getElementById("plant_lvl").innerHTML = "<img style='width: 20%;' src='nic/UI/Level_icon.svg'> " + "Plant Lvl: " + plantLvl;
       }
 
     // Update Resources
-    waterMax = 100 + Math.floor(plantLvl * 1.85);
+    waterMax = 100 + Math.floor(plantLvl * 5.85);
     document.getElementById("water_count").innerHTML = water.toFixed(0) + "/" + waterMax.toFixed(0);
 
     if(energy < energyMax) {
@@ -42,7 +47,7 @@ function tick() {
     if(water < waterMax) {
         water += waterPerSec;
     }
-    energyMax = 25 + Math.floor(plantLvl * 1.85);
+    energyMax = 25 + Math.floor(plantLvl * 5.85);
     document.getElementById("energy_count").innerHTML = energy.toFixed(0) + "/" + energyMax.toFixed(0);
 
     // Update Resources Per Second
@@ -137,16 +142,23 @@ function tick() {
     document.getElementById("plant_height").innerHTML = plantHeight.toFixed(2) + " m tall";
     if(plantHeight >= 0.5) {
         document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun3.svg"
-    } else if(plantHeight >= 1) {
+    }
+    
+    if(plantHeight >= 1) {
         document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun4.svg"
-    } else if(plantHeight >= 2) {
+    } 
+    
+    if(plantHeight >= 2) {
         document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun5.svg"
-    } else if(plantHeight >= 3) {
+    } 
+    
+    if(plantHeight >= 3) {
         document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun6.svg"
     }
 
     document.getElementById("grove_title").innerHTML = "Grove - " + plantHeight.toFixed(2) + " m";
-    plantHeight += metersPerSec;
+    if(plantHeight < plantMaxHeight || hasUnusualHeight == true)
+        plantHeight += metersPerSec;
     document.getElementById("plant_height").innerHTML = plantHeight.toFixed(2) + " m tall";
 }
 

@@ -4,6 +4,7 @@ plantLvl = 0;
 plantXp = 0;
 plantMaxXp = 25;
 plantHeight = 0;
+plantMaxHeight = 3;
 
 mutationPoints = 0;
 
@@ -21,6 +22,10 @@ potassium = 50;
 // Research
 smartRoots = false;
 internalClock = false;
+plantCommunication = false;
+externalSenses = false;
+plantHealth = false;
+plantTemperament = false;
 
 // Gains a Sec
 plantXPSec = 0;
