@@ -1,3 +1,4 @@
+
 var loadingProgress = 0;
 
 setTimeout(loadGame, 100);
