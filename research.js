@@ -1,4 +1,4 @@
-setTimeout(updateResearch, 100);
+setInterval(updateResearch, 100);
 
 function updateResearch() {
     if(water < 15) {
@@ -15,13 +15,17 @@ function updateResearch() {
 
     if(energy < 25) {
         document.getElementById("plant_communication_card").opacity = 0.50;
-    } else if(energy >= 25) {
+    }
+    
+    if(energy >= 25) {
         document.getElementById("plant_communication_card").opacity = 1;
     }
 
     if(water < 35) {
         document.getElementById("external_senses_card").opacity = 0.50;
-    } else if(water >= 35) {
+    }
+    
+    if(water >= 35) {
         document.getElementById("external_senses_card").opacity = 1;
     }
 
@@ -35,7 +39,9 @@ function updateResearch() {
 
     if(water < 50) {
         document.getElementById("plant_temperament_card").opacity = 0.50;
-    } else if(water >= 50) {
+    }
+    
+    if(water >= 50) {
         document.getElementById("plant_temperament_card").opacity = 1;
     }
         
@@ -58,6 +64,10 @@ function buySmartRoots() {
         smartRoots = true;
         plantXPSec += 5;
         metersPerSec += 0.0001;
+
+        let div = document.createElement('div');
+        div.innerHTML = "<p class='slide-in-left'><i class='fas fa-search'></i> Your roots feel smarter!";
+        document.getElementById("messages_log_window").appendChild(div);
     }
 }
 
@@ -73,6 +83,10 @@ function buyInternalClock() {
         document.getElementById("time_display").hidden = false;
         document.getElementById("internal_clock_card").hidden = true;
         internalClock = true;
+
+        let div = document.createElement('div');
+        div.innerHTML = "<p class='slide-in-left'><i class='fas fa-search'></i> The seasons come and go...";
+        document.getElementById("messages_log_window").appendChild(div);
     }
 }
 
@@ -88,6 +102,10 @@ function buyPlantCommunication() {
           document.getElementById("plant_communication_card").hidden = true;
           document.getElementById("social_button").hidden = false;
           plantCommunication = true;
+
+          let div = document.createElement('div');
+          div.innerHTML = "<p class='slide-in-left'><i class='fas fa-search'></i> Time to mingle!";
+          document.getElementById("messages_log_window").appendChild(div);
     }
 }
 
@@ -115,7 +133,12 @@ function buyPlantHealth() {
 
           energy -= 50;
           document.getElementById("plant_health_card").hidden = true;
+          document.getElementById("health_button").hidden = false;
           plantHealth = true;
+
+          let div = document.createElement('div');
+          div.innerHTML = "<p class='slide-in-left'><i class='fas fa-search'></i> You can now check on your plant's health and wellness.";
+          document.getElementById("messages_log_window").appendChild(div);
     }
 }
 

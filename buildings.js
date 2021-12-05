@@ -36,6 +36,8 @@ function update() {
 }
 
 function buyLeaves() {
+    buildingsBought++;
+    document.getElementById("buildings_bought_counter").innerHTML = " Buildings Bought: "+buildingsBought;
     var sound = new Howl({
         src: ['sound/click.ogg'],
       });
@@ -46,6 +48,7 @@ function buyLeaves() {
     plantXPSec++;
     leaves++;
     energyPerSec += 0.1;
+    waterPerSec += 0.1;
     metersPerSec += 0.00025;
     water -= leavesWaterCost;
     leavesWaterCost += Math.floor(leavesWaterCost * 0.35);
@@ -76,6 +79,8 @@ function sellLeaves() {
 }
 
 function buyRoots() {
+    buildingsBought++;
+    document.getElementById("buildings_bought_counter").innerHTML = " Buildings Bought: "+buildingsBought;
     var sound = new Howl({
         src: ['sound/click.ogg'],
       });
@@ -85,6 +90,7 @@ function buyRoots() {
 
     plantXPSec += 5;
     metersPerSec += 0.0005;
+    waterPerSec += 0.5
     roots++;
     water -= rootsWaterCost;
     rootsWaterCost += Math.floor(rootsWaterCost * 0.45);

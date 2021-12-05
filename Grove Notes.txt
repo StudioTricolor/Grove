@@ -1,5 +1,29 @@
 Grove - A game about plants and deep simulation
 
+"A green substance in plants called chlorophyll traps the energy from the Sun needed to make food."
+"The leaf can be thought of as a food factory."
+
+For more news articles...
+https://www.funfactsabout.net/plant-facts/
+
+Becoming Psychoactive
+Your plant can take on many mutations and abilities, including the ability to make yourself psychoactive, here
+are the effects you can give... You can have multiple 'psychoactive abilities' at once to produce synergy.
+ - Energy Inducing
+ - Pain-Killer
+ - Euphoric
+ - Psychedelic
+ - Stoning (can't be combined with any other abilities)
+ - Deliriant (can't be combined with any other abilities)
+
+Skills and Perks
+Main Stats
+ - Resistance (Helps with protection against the elements and disease)
+ - Absorption (Helps with absorption of water and other nutrients)
+ - Growth (Buffs clicks)
+ - Perception (The more points into this, the farther you can see)
+ - Luck (Helps with random events and random drops)
+
 Goal of the Game
 The goal of the game, as any plant would like to achieve, is to spread until your plant eventually
 encompasses the entire planet.

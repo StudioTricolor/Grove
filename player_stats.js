@@ -1,3 +1,5 @@
+setTimeout(addSecond, 1000);
+
 plantName = "";
 plantType = "";
 plantLvl = 0;
@@ -5,10 +7,21 @@ plantXp = 0;
 plantMaxXp = 25;
 plantHeight = 0;
 plantMaxHeight = 3;
+plantSkillPoints = 0;
+skillPointRequirement = 5;
 
 mutationPoints = 0;
+mutationPointRequirement = 10;
 
 sprouted = false;
+
+hoursPlayed = 0;
+minutesPlayed = 0;
+secondsPlayed = 0;
+
+growClicks = 0;
+
+buildingsBought = 0;
 
 // Player Resources
 water = 0;
@@ -18,6 +31,9 @@ waterMax = 100;
 nitrogen = 50;
 phosphorus = 50;
 potassium = 50;
+
+// Religion
+followers = 0;
 
 // Research
 smartRoots = false;
@@ -39,6 +55,7 @@ roots = 0;
 
 // Player Achievements
 achv_aNewBeginning = false;
+achv_gettingSomewhere = false;
 
 function sunflowerSelect() {
     plantType = "sun_flower";
@@ -90,4 +107,18 @@ function morningGlorySelect() {
       });
     
       click.play();
+}
+
+function addSecond() {
+    secondsPlayed++;
+    if (secondsPlayed == 60) {
+        minutesPlayed++;
+        secondsPlayed = 0;
+    }
+    if (minutesPlayed == 60) {
+        hoursPlayed++;
+        minutesPlayed = 0;
+    }
+    setTimeout(addSecond, 1000);
+    document.getElementById("time_played_counter").innerHTML =" Time Played: " +  hoursPlayed + ":" + minutesPlayed + ":" + secondsPlayed;
 }

@@ -15,6 +15,8 @@ function homeButton() {
 
   sound.play();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = false;
   document.getElementById("mutations_tab").hidden = true;
@@ -23,6 +25,8 @@ function homeButton() {
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
   document.getElementById("social_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
 }
 
 function socialButton() {
@@ -32,6 +36,8 @@ function socialButton() {
 
   sound.play();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("social_tab").hidden = false;
@@ -40,6 +46,8 @@ function socialButton() {
   document.getElementById("settings_tab").hidden = true;
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
 }
 
 function researchButton() {
@@ -49,6 +57,8 @@ function researchButton() {
 
   sound.play();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
@@ -57,6 +67,8 @@ function researchButton() {
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = false;
   document.getElementById("social_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
 }
 
 function upgradesButton() {
@@ -66,6 +78,8 @@ function upgradesButton() {
 
   sound.play();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
@@ -74,6 +88,8 @@ function upgradesButton() {
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
   document.getElementById("social_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
 }
 
 function mutationsButton() {
@@ -84,6 +100,8 @@ function mutationsButton() {
   sound.play();
   bruh();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = false;
   document.getElementById("home_tab").hidden = true;
@@ -92,6 +110,8 @@ function mutationsButton() {
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
   document.getElementById("social_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
 }
 
 function achievementsButton() {
@@ -101,6 +121,8 @@ function achievementsButton() {
 
   sound.play();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
@@ -109,6 +131,8 @@ function achievementsButton() {
   document.getElementById("settings_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
   document.getElementById("social_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
 }
 
 function settingsButton() {
@@ -118,6 +142,8 @@ function settingsButton() {
 
   sound.play();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
@@ -126,6 +152,8 @@ function settingsButton() {
   document.getElementById("achievements_tab").hidden = true;
   document.getElementById("research_tab").hidden = true;
   document.getElementById("social_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
 }
 
 function relationshipButton() {
@@ -135,7 +163,95 @@ function relationshipButton() {
 
   sound.play();
 
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
   document.getElementById("relationship_tab").hidden = false;
+  document.getElementById("home_tab").hidden = true;
+  document.getElementById("mutations_tab").hidden = true;
+  document.getElementById("upgrades_tab").hidden = true;
+  document.getElementById("settings_tab").hidden = true;
+  document.getElementById("achievements_tab").hidden = true;
+  document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
+}
+
+function changelogButton() {
+  var sound = new Howl({
+    src: ['sound/click.ogg']
+  });
+
+  sound.play();
+
+  document.getElementById("change_log_tab").hidden = false;
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
+  document.getElementById("relationship_tab").hidden = true;
+  document.getElementById("home_tab").hidden = true;
+  document.getElementById("mutations_tab").hidden = true;
+  document.getElementById("upgrades_tab").hidden = true;
+  document.getElementById("settings_tab").hidden = true;
+  document.getElementById("achievements_tab").hidden = true;
+  document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
+}
+
+function healthButton() {
+  var sound = new Howl({
+    src: ['sound/click.ogg']
+  });
+
+  sound.play();
+
+  document.getElementById("health_tab").hidden = false;
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("relationship_tab").hidden = true;
+  document.getElementById("home_tab").hidden = true;
+  document.getElementById("mutations_tab").hidden = true;
+  document.getElementById("upgrades_tab").hidden = true;
+  document.getElementById("settings_tab").hidden = true;
+  document.getElementById("achievements_tab").hidden = true;
+  document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
+}
+
+function skillsButton() {
+  var sound = new Howl({
+    src: ['sound/click.ogg']
+  });
+
+  sound.play();
+
+  document.getElementById("skills_tab").hidden = false;
+  document.getElementById("health_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("relationship_tab").hidden = true;
+  document.getElementById("home_tab").hidden = true;
+  document.getElementById("mutations_tab").hidden = true;
+  document.getElementById("upgrades_tab").hidden = true;
+  document.getElementById("settings_tab").hidden = true;
+  document.getElementById("achievements_tab").hidden = true;
+  document.getElementById("research_tab").hidden = true;
+  document.getElementById("social_tab").hidden = true;
+  document.getElementById("gaia_tab").hidden = true;
+}
+
+function gaiaButton() {
+  var sound = new Howl({
+    src: ['sound/click.ogg']
+  });
+
+  sound.play();
+
+  document.getElementById("gaia_tab").hidden = false;
+  document.getElementById("skills_tab").hidden = true;
+  document.getElementById("health_tab").hidden = true;
+  document.getElementById("change_log_tab").hidden = true;
+  document.getElementById("relationship_tab").hidden = true;
   document.getElementById("home_tab").hidden = true;
   document.getElementById("mutations_tab").hidden = true;
   document.getElementById("upgrades_tab").hidden = true;
@@ -146,6 +262,9 @@ function relationshipButton() {
 }
 
 function germinate() {
+  growClicks++;
+  document.getElementById("grow_clicks_counter").innerHTML = " Germinate/Grow Clicks: "+ growClicks;
+
   var sound = new Howl({
     src: ['sound/snd_grow_click.wav'],
     volume: 0.1,
@@ -174,7 +293,7 @@ function germinate() {
     plantXp = 0;
     plantMaxXp *= 1.65;
     let div = document.createElement('div');
-    let rngMessage = getRandomInt(3);
+    let rngMessage = getRandomInt(5);
     if(rngMessage == 0)
       div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ".</p>";
     else if(rngMessage = 1)
@@ -183,6 +302,12 @@ function germinate() {
       div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ". That's crazy.</p>";
     else if(rngMessage = 3)
       div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ". Sweeeet.</p>";
+    else if(rngMessage = 4)
+      div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ". Impressive.</p>";
+    else if(rngMessage = 5)
+      div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ". You're a natural!</p>";
+    else if(rngMessage = 6)
+      div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ". Good luck.</p>";
     document.getElementById("messages_log_window").appendChild(div);
 
     document.getElementById("plant_lvl_bar").style = "width: " + (plantXp / plantMaxXp) * 100 + "%;";
@@ -191,6 +316,13 @@ function germinate() {
     if (plantLvl == 1) {
       document.getElementById("plant_selection").hidden = false;
       document.getElementById("main_game").hidden = true;
+      $('#classSelectionAlert').modal('show');
+          
+        var sound = new Howl({
+              src: ['sound/event_warning.ogg']
+            });
+          
+        sound.play();
     }
 
     if(plantLvl == 2) {
@@ -200,11 +332,30 @@ function germinate() {
     if (plantLvl == 3) {
       document.getElementById("sprout_button").hidden = false;
     }
+
+    if(plantLvl == 10 && achv_gettingSomewhere == false) {
+      achv_gettingSomewhere = true;
+      var sound = new Howl({
+        src: ['sound/achievemant.ogg']
+      });
+  
+      sound.play();
+      let div = document.createElement('div');
+      div.innerHTML = "<p class='slide-in-left'><i style='color: #f9c22b;' class='fas fa-trophy'></i> You earned the 'Getting Somewhere' achievement.</p>";
+      document.getElementById("messages_log_window").appendChild(div);
+      document.getElementById("achv_getting_somewhere").style = "opacity: 1;";
+      document.getElementById("achv_getting_somewhere").style = "color: #f9c22b;";
+      document.getElementById("achv_getting_somewhere").title = "Getting Somewhere - Reach lvl 10 and get your first mutation.";
+      document.getElementById("achv_getting_somewhere").classList.add("hvr-push");
+    }
   }
 }
 
 function grow() {
-  plantXp += 1*growUpgradeLevel;
+  growClicks++;
+  document.getElementById("grow_clicks_counter").innerHTML = " Germinate/Grow Clicks: "+ growClicks;
+
+  plantXp += 1*growUpgradeLevel*(plantLvl*0.25);
   if(plantHeight < plantMaxHeight || hasUnusualHeight == true)
     plantHeight += 0.001;
 
@@ -217,7 +368,7 @@ function grow() {
 
   if (getRandomInt(10) == 5) {
     if (water < waterMax)
-      water++;
+      water += plantLvl*0.25;
   }
 
   document.getElementById("plant_lvl_bar").style = "width: " + (plantXp / plantMaxXp) * 100 + "%;";
@@ -237,7 +388,7 @@ function grow() {
     div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You're now Plant Lvl " + plantLvl + ".</p>";
     document.getElementById("messages_log_window").appendChild(div);
 
-    if(plantLvl == 20) {
+    if(plantLvl == 15) {
       mutationPoints++;
       let div_mutate = document.createElement('div');
       div_mutate.innerHTML = "<p class='slide-in-left'><i class='fas fa-bacteria'></i> You gained a mutation point!</p>";
@@ -276,7 +427,7 @@ function sprout() {
 
   document.getElementById("sprout_button").remove();
   document.getElementById("germinate_button").remove();
-  document.getElementById("plant_display").src = "nic/growth_stages/placeholder/Sun2.svg";
+  document.getElementById("plant_display").src = "nic/growth_stages/Sunflower/Sun2.svg";
   document.getElementById("nitrogen_count").hidden = false;
   document.getElementById("phosphorus_count").hidden = false;
   document.getElementById("potassium_count").hidden = false;
@@ -297,13 +448,17 @@ function sprout() {
     let div = document.createElement('div');
     div.innerHTML = "<p class='slide-in-left'><i style='color: #f9c22b;' class='fas fa-trophy'></i> You earned the 'A New Beginning' achievement.</p>";
     document.getElementById("messages_log_window").appendChild(div);
+    document.getElementById("achv_a_new_beginning").style = "opacity: 1;";
+    document.getElementById("achv_a_new_beginning").style = "color: #f9c22b;";
+    document.getElementById("achv_a_new_beginning").title = "A New Beginning - Sprout for the first time.";
+    document.getElementById("achv_a_new_beginning").classList.add("hvr-push");
     plantHeight = 0.01;
     document.getElementById("plant_height").innerHTML = plantHeight.toFixed(2) + " m tall";
   }
 }
 
 function playMusic(option, previousTrack) {
-  var musicTrack = getRandomInt(3);
+  var musicTrack = getRandomInt(5);
 
 
   if(musicTrack == 0) {
@@ -312,6 +467,10 @@ function playMusic(option, previousTrack) {
     musicSource = "sound/grove_song_2.ogg";
   } else if(musicTrack == 2) {
     musicSource = "sound/grove_song_3.ogg";
+  } else if(musicTrack == 3) {
+    musicSource = "sound/grove_song_4.ogg";
+  } else if(musicTrack == 4) {
+    musicSource = "sound/grove_song_5.ogg";
   }
 
   if (option == "playMusic") {

@@ -2,6 +2,15 @@
 var hasUnusualHeight = false;
 setTimeout(updateMutations, 100);
 
+function getMutationPoint() {
+    document.getElementById("mutation_button").disabled = false;
+    mutationPoints++;
+    document.getElementById("mutation_point_display").innerHTML = "You have "+mutationPoints+" Mutation Points";
+    let div = document.createElement('div');
+    div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You gained a mutation point!</p>";
+    document.getElementById("messages_log_window").appendChild(div);
+}
+
 function updateMutations() {
     if(mutationPoints > 0) {
         document.getElementById("unusual_height_button").disabled = false;

@@ -6,7 +6,7 @@
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
+        <script src="gaia_sphere.js"></script>
 
     <!-- jQuery first, then jQuery min.js, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -22,23 +22,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.js"
         integrity="sha512-dMiBqqEV5i3KqpAdsgQSSZ72DnNib7otY0X+b/Tnn1EmLym1dxuZ19csdZqBnfDniKd9bmNtzStQzuMrIa5Ngw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <title id="grove_title">Grove v.0.0.3</title>
+    <title id="grove_title">Grove v.0.0.6</title>
     <link rel="icon" href="nic\UI\Grove_icon.svg">
 </head>
 <body class="container mt-3 noselect">
-    <div class="fade-in-fwd" style="text-align: center;" id="loading_container">
+    <div class="fade-in-fwd" style="text-align: center;" id="loading_container" >
         <div class="container">
-            <div style="display: inline;">
-                <img style="display: inline;" src="nic/UI/Grove_icon.svg">
-                <h2  style="color: #36764e; display: inline;">Grove</h2>
-                <p style="color: #77614e; margin-right: 15px; font-style: italic; display: inline;">v.0.0.4</p>
-            </div>
-            <!-- Loading square for squar.red network -->
-            <span style="margin-left: auto; margin-right: auto; margin-bottom: 15px;" class="loader">
-                <span class="loader-inner">
-
-                </span>
-            </span>
+            <img style="width: 25%; display: block; margin-left: auto; margin-right: auto;" src="img/grove_cover.png">
+            <img style="display: block; margin-left: auto; margin-right: auto;" src="nic/UI/Grove_icon.svg">
             <h3 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);" id="loading_text">
                 Loading...
             </h3>
@@ -50,17 +41,20 @@
                     class="progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 0%;"
                     aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">0%</div>
             </div>
+            <p style="color: #77614e; margin-right: 15px; font-style: italic; display: block;">v.0.0.6</p>
             <img style="width: 25%;" src="img/blackbook_logo.png">
         </div>
 
     </div>
 
-    <nav id="main_navbar" style="background-color: #e2ebc3;"
-        class="shadow-sm navbar navbar-expand-lg navbar-light fade-in-fwd" hidden>
+    <nav style="" id="main_navbar" style="background-color: #e2ebc3;"
+        class="shadow-sm navbar navbar-expand-lg navbar-light fade-in-fwd">
         <div class="container-fluid">
             <img src="nic/UI/Grove_icon.svg">
             <h2 style="color: #36764e;">Grove</h2>
-            <p style="color: #77614e; margin-right: 15px; font-style: italic;">v.0.0.4</p>
+            <a href="#" onclick="changelogButton()">
+                <p style="color: #77614e; margin-right: 15px; font-style: italic;">v.0.0.5</p>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -69,13 +63,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item" style="margin-left: 25px;">
-                        <div id="message_display"
+                        <div onclick="changeMessage()" id="message_display"
                             style="border-radius: 10px; padding-top: 15px; text-align: center; background-color: #eed3cc; width: 600px; height: 65px; background-image: url('img/topbarfornews.svg');  background-size: cover; background-repeat: no-repeat;">
                         </div>
                     </li>
                     <li id="time_display" style="margin-left: 25px;" hidden>
                         <h5 id="month_and_season">March | Spring</h5>
                         <h5 id="year_count">Year: 0</h5>
+                        <h5 id="temperature_display" hidden>0 F</h5>
                     </li>
                     <li>
                         <h6 id="raining_alert" style="margin-left: 10px; color: #484a77;" hidden>It's raining <i
@@ -94,6 +89,13 @@
                     <a href="https://www.patreon.com/user?u=63986320" target="_blank">
                         <i class="fas fa-square fa-stack-2x"></i>
                         <i class="fab fa-patreon fa-stack-1x fa-inverse"></i>
+                    </a>
+                </span>
+                <span data-toggle="tooltip" data-placement="top"
+                title="Link Tree" class="fa-stack fa-2x hvr-bob">
+                    <a href="https://linktr.ee/BlackBook21" target="_blank">
+                        <i class="fas fa-square fa-stack-2x"></i>
+                        <i class="fas fa-tree fa-stack-1x fa-inverse"></i>
                     </a>
                 </span>
             </div>
@@ -222,43 +224,58 @@
         <div style="margin: 15px 15px 15px 15px;">
             <h3 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);" id="plant_description">You are a seed.</h3>
             <h6 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);" id="plant_height" hidden>0.00 m tall</h6>
+            <p id="meters_sec_display" hidden>(0.00 m/sec)</p>
             <p id="plant_type_text"></p>
             <hr class="dotted">
             <button
-                style="color: #1ebc73; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                style="color: #1ebc73; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 100px;"
                 type="button" onclick="homeButton()" class="btn btn-dark hvr-bob">Home <i
                     class="fas fa-home"></i></button>
+            <button id="health_button"
+                    style="color: #ea4f36; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 100px;"
+                    type="button" onclick="healthButton()" class="btn btn-dark hvr-bob" hidden>Health <span
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" hidden>
+                        0</span><i class="fas fa-notes-medical"></i></button>
+            <button id="skills_button"
+                        style="color: #8fd3ff; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 100px;"
+                        type="button" onclick="skillsButton()" class="btn btn-dark hvr-bob" hidden>Skills <span
+                            class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" hidden>
+                            0</span><i class="far fa-lightbulb"></i></button>
             <button id="research_button"
-                style="color: #4d9be6; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                style="color: #4d9be6; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 110px;"
                 type="button" onclick="researchButton()" class="btn btn-dark hvr-bob" hidden>Research <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" hidden>
                     0</span> <i class="fas fa-microscope"></i></button>
             <button id="upgrade_button"
-                style="color: #e29898; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                style="color: #e29898; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 115px;"
                 type="button" onclick="upgradesButton()" class="btn btn-dark hvr-bob" hidden>Upgrades <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" hidden>
                     0</span><i class="far fa-arrow-alt-circle-up"></i></button>
             <button id="mutation_button"
-                style="color: #e83b3b; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                style="color: #e83b3b; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 125px;"
                 type="button" onclick="mutationsButton()" class="btn btn-dark hvr-bob" hidden>Mutations <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" hidden>
                     0</span><i class="fas fa-bacteria"></i></button>
             <button id="relationships_button"
-                    style="color: #ed8099; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                    style="color: #ed8099; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 140px;"
                     type="button" onclick="relationshipButton()" class="btn btn-dark hvr-bob" hidden>Relationships <i class="fas fa-heart"></i></button>
             <button id="social_button"
-                    style="color: #30e1b9;; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                    style="color: #30e1b9;; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 100px;"
                     type="button" onclick="socialButton()" class="btn btn-dark hvr-bob" hidden>Social <i   style="color: #30e1b9;"class="fas fa-globe-americas"></i></button>
+            <button id="gaia_button"
+                    style="color: #e0dc9f; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 100px;"
+                    type="button" onclick="gaiaButton()" class="btn btn-dark hvr-bob" hidden>Gaia <img src="img/icons/angel.svg" style="width: 24px; color: white;"></button>
             <button id="achievement_button"
-                style="color: #e0dc9f; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                style="color: #e0dc9f; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 150px;"
                 type="button" onclick="achievementsButton()" class="btn btn-dark hvr-bob" hidden>Achievements <i
                     class="fas fa-trophy"></i></button>
             <button
-                    style="color: #8d9497; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px;"
+                    style="color: #8d9497; background-image: url('img/Layer_2.svg'); background-size: cover; margin-right: 5px; width: 110px;"
                     type="button" onclick="settingsButton()" class="btn btn-dark hvr-bob">Settings <i
                         class="fas fa-cogs"></i></button>
 
         </div>
+        <!-- Plant Level and Buildings Screen -->
         <div class="row">
             <div class="col-md-8">
                 <div id="home_tab" class="fade-in-fwd">
@@ -267,12 +284,14 @@
                             <div class="col">
                                 <h3 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);" id="plant_lvl"><img style="width: 20%; " src="nic/UI/Level_icon.svg"> Plant Lvl: 0
                                 </h3>
+                                
                                 <div class="progress">
                                     <div id="plant_lvl_bar"
                                         class="progress-bar progress-bar-striped progress-bar-animated"
                                         role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"
                                         style="width: 0%">0xp/50xp</div>
                                 </div>
+                                <p id="xp_sec_display" hidden>(0 xp/sec)</p>
                                 <button id="germinate_button" style="margin-top: 15px;" onclick="germinate()"
                                     type="button" class="btn btn-dark pulsate-bck">Germinate <i
                                         class="fas fa-seedling"></i></button>
@@ -284,7 +303,7 @@
                                 <div class="card" id="leaves_container" style="margin-top: 25px; width: 18rem;" hidden>
                                     <div class="card-body">
                                         <h4 id="leaves_count"><i class="fab fa-envira fa-1x"></i> Leaves: 0</h4>
-                                        <p>Provides energy/sec. Also increases water received from rainy weather.</p>
+                                        <p>Provides water & energy/sec. Also increases water received from rainy weather.</p>
                                         <p id="leaves_cost">Costs: <br>10 Water <i class="fas fa-tint"></i> <br>5 Energy
                                             <i class="far fa-sun"></i></p>
                                         <button id="leaves_buy" onclick="buyLeaves()" type="button"
@@ -310,8 +329,11 @@
                         <div class="col">
 
                         </div>
-                        <div class="col ">
-                              <img id="plant_display" src="nic/growth_stages/placeholder/Sun1.svg" >
+                        
+                        <div style="margin-top: 35px; margin-bottom: 50px; margin-left: -100px;" class="col">
+                                <div>
+                              <img style="position: absolute; margin-bottom: 35px;" id="plant_display" src="nic/growth_stages/Sunflower/Sun1.svg">
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -553,18 +575,21 @@
                 <div class="container" style="margin-top: 25px;">
                     <div class="row">
                         <h3 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><i class="fas fa-trophy"></i> Achievements</h3>
+                        <p>Renown: 0 <i class="fas fa-crown"></i></p>
                         <hr class="dotted">
                     </div>
                     <div class="row">
                         <h4>Tier I</h4>
                         <div class="col">
-                            <div style="opacity: 25%;" class="fa-stack fa-2x">
+                            <div data-toggle="tooltip" data-placement="top"
+                            title="" id="achv_a_new_beginning" style="opacity: 25%;" class="fa-stack fa-2x" >
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
                             </div>
                         </div>
                         <div class="col">
-                            <div style="opacity: 25%;" class="fa-stack fa-2x">
+                            <div data-toggle="tooltip" data-placement="top"
+                            title="" id="achv_getting_somewhere" style="opacity: 25%;" class="fa-stack fa-2x">
                                 <i class="fas fa-square fa-stack-2x"></i>
                                 <i class="fas fa-trophy fa-stack-1x fa-inverse"></i>
                             </div>
@@ -724,6 +749,19 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <h3 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><i class="fas fa-signal"></i> Stats</h3>
+                        <hr class="dotted">
+                    </div>
+                    <div>
+                        <i style="display: inline;" class="fas fa-clock"></i><h5 id="time_played_counter" style="display: inline;"> Time Played: 00:00:00</h5>
+                    </div>
+                    <div>
+                        <i class="fas fa-mouse-pointer"></i><h5 id="grow_clicks_counter" style="display: inline;"> Germinate/Grow Clicks: 0</h5>
+                    </div>
+                    <div>
+                        <i class="fas fa-home"></i><h5 id="buildings_bought_counter" style="display: inline;"> Buildings Bought: 0</h5>
+                    </div>
                 </div>
             </div>
 
@@ -782,6 +820,99 @@
                 </div>
             </div>
 
+            <div id="change_log_tab" class="fade-in-fwd" hidden>
+                <div class="container" style="margin-top: 25px;">
+                    <div class="row">
+                        <h3 style="margin-bottom: 25px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><i class="fas fa-clipboard-list"></i> Changelog</h3>
+                        <hr class="dotted">
+                    </div>
+                    <h4 style="font-weight: bold;">v0.0.5</h4>
+                    <p style="font-weight: bold;">'The Big Boi Update'</p>
+                    <p>
+                        - Added meters per second counter and xp per second counter.
+                        <br>
+                        - Added Black Book link-tree icon to the navbar
+                        <br>
+                        - Headlines can now be manually changed by clicking on the headline box
+                        <br>
+                        - You can click on the version number next to the Grove logo to see the changelog.
+                    </p>
+                </div>
+            </div>
+
+            <div id="health_tab" class="fade-in-fwd" hidden>
+                <div class="container" style="margin-top: 25px;">
+                    <div class="row">
+                        <h3 style="margin-bottom: 25px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><i class="fas fa-file-medical-alt"></i> Health</h3>
+                        <hr class="dotted">
+                    </div>
+                    <div class="col">
+                        <h4>Plant Health</h4>
+                        <input style="pointer-events: none;" type="range" min="0" max="100" value="0"
+                            class="range blue" />
+                    </div>
+                </div>
+            </div>
+
+            <div id="gaia_tab" class="fade-in-fwd" hidden>
+                <div class="container" style="margin-top: 25px;">
+                    <div class="row">
+                        <h3 style="margin-bottom: 25px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><img style="width: 32px;" src="img/icons/angel.svg"> Gaia</h3>
+                        <hr class="dotted">
+                    </div>
+                </div>
+                <div class="fade-in-fwd" style="text-align: center;" >
+                    <div id="canvas"></div>
+                    <h5>"Hello child."</h5>
+                </div>
+            </div>
+
+            <!-- Skills Tab -->
+            <div id="skills_tab" class="fade-in-fwd" hidden>
+                <div class="container" style="margin-top: 25px;">
+                    <div class="row">
+                        <h3 style="margin-bottom: 25px; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><i class="far fa-lightbulb"></i> Skills</h3>
+                        <h5 id="skill_point_display">You have 0 skill points <i class="far fa-lightbulb"></i></h5>
+                        <hr class="dotted">
+                        <div style="display: inline; text-align: center;">
+                            <h3 style="display: inline;"><i class="fas fa-shield-alt"></i> Resistance: </h3>
+                            
+                            <h3 id="resistance_display" style="display: inline;"> 1 </h3>
+                            <button data-toggle="tooltip" data-placement="top"
+                            title="Helps with protection against the elements and disease." class="hvr-grow" onclick="buyResistance()"><i style="color: #1ebc73;" class="fas fa-plus-square fa-2x"></i></button>
+                        </div>
+                        <div style="margin-top:25px; display: inline; text-align: center;">
+                            <h3 style="display: inline;"><i class="fas fa-heart"></i> Absorption: </h3>
+                            
+                            <h3 id="absorption_display" style="display: inline;"> 1 </h3>
+                            <button data-toggle="tooltip" data-placement="top"
+                            title="Helps with absorption of water and other nutrients." class="hvr-grow" onclick="buyAbsorption()"><i style="color: #1ebc73;" class="fas fa-plus-square fa-2x"></i></button>
+                        </div>
+                        <div style="margin-top:25px; display: inline; text-align: center;">
+                            <h3 style="display: inline;"><i class="fas fa-arrow-up"></i> Growth: </h3>
+                            
+                            <h3 id="growth_display" style="display: inline;"> 1 </h3>
+                            <button data-toggle="tooltip" data-placement="top"
+                            title="Buffs clicks." class="hvr-grow" onclick="buyGrowth()"><i style="color: #1ebc73;" class="fas fa-plus-square fa-2x"></i></button>
+                        </div>
+                        <div style="margin-top:25px; display: inline; text-align: center;">
+                            <h3 style="display: inline;"><i class="fas fa-eye"></i> Perception: </h3>
+                            
+                            <h3 id="perception_display" style="display: inline;"> 1 </h3>
+                            <button data-toggle="tooltip" data-placement="top"
+                            title="The more points into this, the farther you can perceive." class="hvr-grow" onclick="buyPerception()"><i style="color: #1ebc73;" class="fas fa-plus-square fa-2x"></i></button>
+                        </div>
+                        <div style="margin-top:25px; display: inline; text-align: center;">
+                            <h3 style="display: inline;"><i class="fas fa-gem"></i> Luck: </h3>
+                            
+                            <h3 id="luck_display" style="display: inline;"> 1 </h3>
+                            <button data-toggle="tooltip" data-placement="top"
+                            title="Helps with random events and random drops." class="hvr-grow" onclick="buyLuck()"><i style="color: #1ebc73;" class="fas fa-plus-square fa-2x"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="settings_tab" class="fade-in-fwd" hidden>
                 <div class="container" style="margin-top: 25px;">
                     <div class="row">
@@ -797,7 +928,7 @@
                             <h4 style="display: inline;">Music</h4>
                             <label style="display: block;" for="customRange1" class="form-label">Music
                                 Volume</label>
-                            <input min="0" max="1.0" oninput="playMusic('volumeChange')" type="range" class="form-range"
+                            <input min="0" max="1.0" oninput="playMusic('volumeChange')" type="range" step="0.1" class="form-range"
                                 id="volume_range">
                         </div>
                         <div class="col">
@@ -847,6 +978,7 @@
                             </div>
                         </div>
                         <div class="col">
+                            <button onclick="wipeSaveAlert()" type="button" class="btn btn-danger">Wipe Save <i class="far fa-save"></i></button>
                         </div>
                         <div class="col ">
                         </div>
@@ -854,9 +986,8 @@
                 </div>
             </div>
 
-            <div id="resources_container" style="margin: 15px 15px 15px 15px;">
-                <h3 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);">Resources <i data-toggle="tooltip" data-placement="top"
-                        title="All your resources, in a neat fashion." class="far fa-question-circle hvr-push"></i></h3>
+            <div id="resources_container" style="margin: 200px 15px 15px 15px;">
+                <h3 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"> <i class="fas fa-boxes"></i> Resources </h3>
                 <div
                     style="border: 2px solid; border-radius: 10px; padding: 15px 15px 15px 15px; background-color: #eaf4e8; width: 600px; height: 350px; ">
                     <div style="text-align: center;">
@@ -893,30 +1024,46 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="col">
-                                        <p style="margin-bottom: -5px; color: #fbb954;"><i class="far fa-sun"></i>
-                                            Energy</p>
-                                        <p id="energy_count">0/25</p>
+                                        <div data-toggle="tooltip" data-placement="top"
+                                        title="Praise the sun! Energy is used for a variety of things.">
+                                            <p style="margin-bottom: -5px; color: #fbb954;"><i class="far fa-sun"></i>
+                                                Energy</p>
+                                            <p id="energy_count">0/25</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <i data-toggle="tooltip" data-placement="top"
+                        title="All your resources, in a neat fashion." class="far fa-question-circle hvr-push"></i>
             </div>
 
         </div>
         <div class="col-6 col-md-4">
-            <h4 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);">Log <i class="fas fa-envelope-square"></i></h4>
+            
+            <h4 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><i class="fas fa-envelope-square"></i> Log </h4>
             <div style="width: 400px;" class="gradient-border" id="messages_log_window">
             </div>
+
+            <!-- Events Window -->
+            <div id="events_window_container" hidden>
+                <h4 style="text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);"><i class="far fa-calendar"></i> Events </h4>
+                <div style="width: 400px;" class="gradient-border" id="events_window">
+                </div>
+            </div>  
+
             <div style="width: 400px; height: 300px; margin-top: 50px;" class="gradient-border" id="gains_window">
                 <p class="fade-in-fwd" id="energy_per_second"><i class="far fa-sun"></i> Energy: + 0.1/sec</p>
                 <p class="fade-in-fwd" id="water_per_second" hidden><i class="fas fa-tint"></i> Water: + 0/sec</p>
             </div>
+            <i data-toggle="tooltip" data-placement="top"
+                        title="This shows you resources you gain passively." class="far fa-question-circle hvr-push"></i>
         </div>
     </div>
     </div>
-
+    <div id="canvas"></div>
     <div class="footer shadow-sm">
         <p>Black Book | 2021</p>
     </div>
@@ -988,7 +1135,38 @@
     </div>
 </div>
 
-<div class="modal fade" id="firstMutationAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+<div class="modal fade" id="classSelectionAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-seedling"></i> Class Selection</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Grove is a class-based game, where different plants are different classes.
+                    <br>
+                    <br>
+                    The class you choose will dictate how the rest of the game will play and work.
+                    <br>
+                    <br>
+                    In the beginning you may only choose one class, the sunflower, but you will earn more classes as you progress.
+                    <br>
+                    <br>
+                    <p>Please select a class!</p>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="classSelectionAlertClose()" type="button" class="btn btn-danger"
+                    data-dismiss="modal">Ok!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="wipeSaveAlert" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -1001,23 +1179,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>You are about to buy your first mutation.
+                    You are about to wipe your save. This will remove all your current progress and achievements.
                     <br>
                     <br>
-                    Mutations can have unintended effects on your game and plant. They can provide very game altering effects in both good and bad ways.
-                    <br>
-                    <br>
-                    'Unusual Height' will let your plant grow past its normal height.
-                    <br>
-                    <br>
-                    <p style="color: red;">Are you sure you want to continue?</p>
+                    <p>Do you wish to continue?</p>
                 </p>
             </div>
             <div class="modal-footer">
-                <button onclick="unusualHeightClose()" type="button" class="btn btn-danger"
+                <button onclick="wipeSaveClose()" type="button" class="btn btn-danger"
                     data-dismiss="modal">Cancel</button>
-                    <button onclick="buyUnusualHeight()" type="button" class="btn btn-danger"
-                    data-dismiss="modal">Buy</button>
+                    <button onclick="wipeSaveConfirm()" type="button" class="btn btn-danger"
+                    data-dismiss="modal">WIPE</button>
             </div>
         </div>
     </div>
@@ -1041,5 +1213,8 @@
     <script src="research.js"></script>
     <script src="mutations.js"></script>
     <script src="upgrades.js"></script>
-
-    
+    <!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js'></script><script  src="./script.js"></script>
+  <script src="gaia_sphere.js"></script>
+  <script src="skills.js"></script>
+  <script src="rain_script.js"></script>

@@ -5,7 +5,7 @@ photosynthesisUpgradeLevel = 1;
 growUpgradeCost = 5;
 photosynthesisUpgradeCost = 2;
 
-setInterval(updateUpgradeButtons, 100);
+setInterval(updateUpgradeButtons, 10);
 
 function growUpgradeBuy() {
     growUpgradeLevel++;

@@ -46,3 +46,30 @@ function changeLoadingText() {
         document.getElementById("loading_info").innerHTML = "Preparing for winter...";
     }
 }
+
+function classSelectionAlertClose() {
+    $('#classSelectionAlert').modal('hide');
+}
+
+function wipeSaveAlert() {
+    $('#wipeSaveAlert').modal('show');
+
+    var sound = new Howl({
+        src: ['sound/event_warning.ogg']
+      });
+    
+  sound.play();
+}
+
+function wipeSaveClose() {
+    $('#wipeSaveAlert').modal('hide');
+}
+
+function getSkillPoint() {
+    plantSkillPoints++;
+    //document.getElementById("mutation_point_display").innerHTML = "You have "+mutationPoints+" Mutation Points";
+    let div = document.createElement('div');
+    div.innerHTML = "<p class='slide-in-left'><i style='color: #f04f78;' class='fas fa-level-up-alt'></i> You gained a skill point!</p>";
+    document.getElementById("messages_log_window").appendChild(div);
+    document.getElementById("skill_point_display").innerHTML = "You have "+plantSkillPoints+" Skill Points <i class='far fa-lightbulb'></i>";
+}
